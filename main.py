@@ -37,7 +37,7 @@ def print_event(msg):
 
 # Some Hardcore settings
 
-max_publishers_no = 500
+max_publishers_no = 50
 # hostname ='brightiotdev'
 # hostname = 'broker.hivemq.com'
 hostname = 'localhost'
