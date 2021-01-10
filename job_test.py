@@ -1,5 +1,5 @@
 import time
-from multiprocessing import Process, current_process, cpu_count, JoinableQueue
+from multiprocessing import Process, current_process, cpu_count, JoinableQueue, Queue
 import multiprocessing
 
 class Publisher(Process):
@@ -36,7 +36,8 @@ class Publisher(Process):
 if __name__ == "__main__":
     start = time.time()
     publishers = []
-    sub_buffer = JoinableQueue()
+    # sub_buffer = JoinableQueue()
+    sub_buffer = Queue()
     for i in range(2000):
         p = Publisher(name='C'+str(i), hostname='10.02.01.15', port=1883, buffer=sub_buffer)
         publishers.append(p)
@@ -45,6 +46,12 @@ if __name__ == "__main__":
         name, delta = p.getJobDelta
         print('Job : {}, completed in {} seconds' .format(name, delta))
 
+    # while True:
+    while not sub_buffer.empty():
+        ret = sub_buffer.get_nowait()
+        print(f'[INFO] ret:{ret}')
+
+        # time.sleep(2)
 
     # Waiting for clients to finish job
     for client in publishers:
