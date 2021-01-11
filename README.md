@@ -2,6 +2,7 @@
 
 MQTT Protocol Benchmark Test Tool
 Version 1.0
+----------------------------------
 
 ### Usage
 ```
