@@ -3,6 +3,9 @@
 MQTT Protocol Benchmark Test Tool
 Version 1.0
 ----------------------------------
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+
 
 ### Usage
 ```
