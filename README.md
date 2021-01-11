@@ -43,8 +43,7 @@ python main.py --auth True --username dev --password dev1234 --publishers 200 --
         ========================================
         
 Number of cpu : 4
- entity : subscriber, client : 1, msg : [INFO] client connection ...[OK]                                                                       | 0/600 [00:00<?, ?it/s]
- entity : subscriber, client : 1, msg : [INFO] Stopping ....██████████████████████████████████████████████████████████▉             | 538/600 [00:05<00:00, 186.43it/s]
+ entity : subscriber, client : 1, msg : [INFO] client connection ...[OK]                                                                       
 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 600/600 [00:06<00:00, 99.79it/s]
  entity : subscriber, client : 1, msg : [INFO] Subscriber Stopping ...
  entity : subscriber, client : 1, msg : [INFO] Subscriber Stopped ...[OK]
