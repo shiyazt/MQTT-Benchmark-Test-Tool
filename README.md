@@ -104,4 +104,4 @@ Number of cpu : 4
 
 
 ### Reference
-[1]: (https://pypi.org/project/pymqttbench/)
+[1]: https://pypi.org/project/pymqttbench
