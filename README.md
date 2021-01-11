@@ -35,7 +35,7 @@ optional arguments:
 
 #### Sample Usage
 ```
-python main.py --auth True --username dev --password dev1234 --publishers 200 --max_messages 3 --timeout 60 --qos 2
+python main.py --host localhost --port 1883 --auth True --username <username> --password <password> --publishers 200 --max_messages 3 --timeout 60 --qos 2
 
         ========================================
                 MQTT Benchmark Test Tool 
