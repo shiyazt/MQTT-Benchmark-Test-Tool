@@ -6,6 +6,8 @@ import numpy as np
 import sys
 from tqdm import tqdm
 import statistics
+import json
+from datetime import datetime
 
 def getRandomNumber(min, max):
     return random.uniform(min, max)
@@ -43,8 +45,8 @@ class Subscriber(Process):
             self._running = False
 
             # Timing Fields
-            self._start_ts = None
-            self._end_ts = None
+            # self._start_ts = None
+            # self._end_ts = None
             self._sub_start_ts = None
             self._sub_end_ts = None
 
@@ -87,7 +89,6 @@ class Subscriber(Process):
         # self.print_debug('[DEBUG] Process : {}' .format(current_process().name))
         try:
             self._sub_start_ts = time.time()
-            self._start_ts = time.time()
             progress_bar = tqdm(total=self._max_msg_count)
             def on_connect(client, userdata, flags, rc):
                 # self.print_debug('[INFO] client connection with rc : {}' .format(rc))
@@ -100,20 +101,16 @@ class Subscriber(Process):
                     raise Exception('Connection Problem')
 
             def on_message(client, userdata, msg):
-                # self._msg_count += 1
-                # self.print_debug('[INFO] msg_count: {}' .format(self._msg_count))
-                if not self._start_ts:
-                    self._start_ts = time.time()
+
                 if msg.topic == self._topic:
                     # self.print_debug('[DEBUG] msg received, count : {0}, total: {1}' .format(self._msg_count, self._total_msg_limit))
                     if self._msg_count < self._max_msg_count:
                         progress_bar.update(1)
                         self._msg_count += 1
                         self._successMsgs += 1
-                        self._end_ts = round(time.time() - self._start_ts, 6)
-                        self._sub_deltas.append(self._end_ts)
+                        delta = round(time.time() - json.loads(msg.payload)['timestamp'], 4)
+                        self._sub_deltas.append(delta)
                         self._sub_msgSizes.append(sys.getsizeof(msg.payload))
-                        self._start_ts = time.time()
                     else:
                         self.print_debug('[ERROR] Max Message Received Limit Exceeded')
                 else:
@@ -167,6 +164,6 @@ class Subscriber(Process):
                 self.print_debug('[ERROR] Connection Failed')
 
     def print_debug(self, msg):
-        print('\r entity : {0}, client : {1}, msg : {2}' .format('subscriber', self._id, msg))
+        print('\r {} entity : {}, client : {}, msg : {}' .format(datetime.now().strftime("%d/%m/%Y %H:%M:%S"), 'subscriber', self._id, msg))
 
 
